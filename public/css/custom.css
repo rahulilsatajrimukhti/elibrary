@@ -1,0 +1,56 @@
+.btn-add {
+    display: inline-flex;
+    align-items: center;
+    background: #4e73df;
+    color: #fff !important; /* paksa putih */
+    height: 35px;
+    width: 35px;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 0 10px;
+    text-decoration: none !important; /* hilangkan underline */
+}
+
+/* ICON */
+.btn-add i {
+    font-size: 14px;
+    min-width: 16px;
+    text-align: center;
+}
+
+/* TEXT */
+.btn-add .btn-text {
+    opacity: 0;
+    margin-left: 8px;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #fff; /* pastikan putih */
+    text-decoration: none; /* no underline */
+    transition: opacity 0.3s ease;
+}
+
+/* HOVER */
+.btn-add:hover {
+    width: 110px;
+    background: #2e59d9;
+    color: #fff !important; /* jangan berubah */
+}
+
+/* PENTING: override bootstrap link hover */
+.btn-add:hover,
+.btn-add:focus,
+.btn-add:active {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* munculin text */
+.btn-add:hover .btn-text {
+    opacity: 1;
+}
+
+.form-control.is-invalid {
+    border-color: #e74a3b;
+    box-shadow: none;
+}
