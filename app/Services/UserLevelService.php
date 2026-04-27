@@ -9,7 +9,7 @@ class UserLevelService
 {
     public function getAll()
     {
-        return UserLevel::all();
+        return UserLevel::orderBy('name', 'asc')->get();
     }
 
     public function store(UserLevelDTO $dto)

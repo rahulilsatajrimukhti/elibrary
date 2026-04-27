@@ -9,9 +9,7 @@ use App\Http\Requests\UpdateUserLevelRequest;
 
 class UserLevelController extends Controller
 {
-    public function __construct(private UserLevelService $service)
-    {
-    }
+    public function __construct(private UserLevelService $service) {}
 
     public function index()
     {

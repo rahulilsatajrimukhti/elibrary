@@ -1,32 +1,39 @@
-.btn-add {
+.btn-add,
+.btn-add-user {
     display: inline-flex;
     align-items: center;
     background: #4e73df;
-    color: #fff !important; /* paksa putih */
+    color: #fff !important;
+    /* paksa putih */
     height: 35px;
     width: 35px;
     border-radius: 50px;
     overflow: hidden;
     transition: all 0.3s ease;
     padding: 0 10px;
-    text-decoration: none !important; /* hilangkan underline */
+    text-decoration: none !important;
+    /* hilangkan underline */
 }
 
 /* ICON */
-.btn-add i {
+.btn-add i,
+.btn-add-user i {
     font-size: 14px;
     min-width: 16px;
     text-align: center;
 }
 
 /* TEXT */
-.btn-add .btn-text {
+.btn-add .btn-text,
+.btn-add-user .btn-text {
     opacity: 0;
     margin-left: 8px;
     white-space: nowrap;
     font-size: 13px;
-    color: #fff; /* pastikan putih */
-    text-decoration: none; /* no underline */
+    color: #fff;
+    /* pastikan putih */
+    text-decoration: none;
+    /* no underline */
     transition: opacity 0.3s ease;
 }
 
@@ -34,19 +41,31 @@
 .btn-add:hover {
     width: 110px;
     background: #2e59d9;
-    color: #fff !important; /* jangan berubah */
+    color: #fff !important;
+    /* jangan berubah */
+}
+
+.btn-add-user:hover {
+    width: 75px;
+    background: #2e59d9;
+    color: #fff !important;
+    /* jangan berubah */
 }
 
 /* PENTING: override bootstrap link hover */
 .btn-add:hover,
 .btn-add:focus,
-.btn-add:active {
+.btn-add:active,
+.btn-add-user:hover,
+.btn-add-user:focus,
+.btn-add-user:active {
     color: #fff !important;
     text-decoration: none !important;
 }
 
 /* munculin text */
-.btn-add:hover .btn-text {
+.btn-add:hover .btn-text,
+.btn-add-user:hover .btn-text {
     opacity: 1;
 }
 

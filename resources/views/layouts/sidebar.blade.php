@@ -19,6 +19,13 @@
         </a>
     </li>
 
+    <li class="nav-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('users.index') }}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>User</span>
+        </a>
+    </li>
+
     <li class="nav-item {{ request()->routeIs('user-levels.*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('user-levels.index') }}">
             <i class="fas fa-fw fa-users"></i>
