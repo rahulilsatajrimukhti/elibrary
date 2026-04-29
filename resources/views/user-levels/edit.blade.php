@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Edit User Level')
 
 @section('content')
     <div class="container-fluid">

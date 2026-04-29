@@ -1,5 +1,6 @@
 .btn-add,
-.btn-add-user {
+.btn-add-user,
+.btn-add-menu {
     display: inline-flex;
     align-items: center;
     background: #4e73df;
@@ -17,7 +18,8 @@
 
 /* ICON */
 .btn-add i,
-.btn-add-user i {
+.btn-add-user i,
+.btn-add-menu i {
     font-size: 14px;
     min-width: 16px;
     text-align: center;
@@ -25,7 +27,8 @@
 
 /* TEXT */
 .btn-add .btn-text,
-.btn-add-user .btn-text {
+.btn-add-user .btn-text,
+.btn-add-menu .btn-text {
     opacity: 0;
     margin-left: 8px;
     white-space: nowrap;
@@ -52,20 +55,31 @@
     /* jangan berubah */
 }
 
+.btn-add-menu:hover {
+    width: 80px;
+    background: #2e59d9;
+    color: #fff !important;
+    /* jangan berubah */
+}
+
 /* PENTING: override bootstrap link hover */
 .btn-add:hover,
 .btn-add:focus,
 .btn-add:active,
 .btn-add-user:hover,
 .btn-add-user:focus,
-.btn-add-user:active {
+.btn-add-user:active,
+.btn-add-menu:hover,
+.btn-add-menu:focus,
+.btn-add-menu:active {
     color: #fff !important;
     text-decoration: none !important;
 }
 
 /* munculin text */
 .btn-add:hover .btn-text,
-.btn-add-user:hover .btn-text {
+.btn-add-user:hover .btn-text,
+.btn-add-menu:hover .btn-text {
     opacity: 1;
 }
 

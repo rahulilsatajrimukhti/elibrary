@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-book"></i>
         </div>
@@ -19,19 +19,36 @@
         </a>
     </li>
 
-    <li class="nav-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('users.index') }}">
-            <i class="fas fa-fw fa-user"></i>
-            <span>User</span>
-        </a>
-    </li>
+    @foreach ($menus as $menu)
+        @if ($menu->children->count())
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#menu{{ $menu->id }}">
+                    <i class="fas fa-fw fa-{{ $menu->icon }}"></i>
+                    <span>{{ $menu->name }}</span>
+                </a>
 
-    <li class="nav-item {{ request()->routeIs('user-levels.*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('user-levels.index') }}">
-            <i class="fas fa-fw fa-users"></i>
-            <span>User Level</span>
-        </a>
-    </li>
+                <div id="menu{{ $menu->id }}" class="collapse">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        @foreach ($menu->children as $child)
+                            <a class="collapse-item" href="{{ $child->route ? route($child->route) : '#' }}">
+                                {{ $child->name }}
+                            </a>
+                        @endforeach
+
+                    </div>
+                </div>
+            </li>
+        @else
+            <li class="nav-item {{ request()->routeIs($menu->route) ? 'active' : '' }}">
+                <a class="nav-link" href="{{ $menu->route ? route($menu->route) : '#' }}">
+                    <i class="fas fa-fw fa-{{ $menu->icon }}"></i>
+                    <span>{{ $menu->name }}</span>
+                </a>
+            </li>
+        @endif
+    @endforeach
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
