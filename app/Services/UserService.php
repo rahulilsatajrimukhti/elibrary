@@ -5,6 +5,7 @@ namespace App\Services;
 use App\DTO\UserDTO;
 use App\Models\User;
 use App\Models\UserLevel;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -20,7 +21,10 @@ class UserService
 
     public function store(UserDTO $dto)
     {
-        return User::create($dto->toArray());
+        $data               = $dto->toArray();
+        $data['password']   = Hash::make($data['password']);
+
+        return User::create($data);
     }
 
     public function find($id)
@@ -30,8 +34,17 @@ class UserService
 
     public function update($id, UserDTO $dto)
     {
-        $data = User::findOrFail($id);
-        $data->update($dto->toArray());
+        $data       = User::findOrFail($id);
+        $payload    = $dto->toArray();
+
+        if (!empty($payload['password'])) {
+            $payload['password'] = Hash::make($payload['password']);
+        } else {
+            unset($payload['password']);
+        }
+
+        $data->update($payload);
+
         return $data;
     }
 
