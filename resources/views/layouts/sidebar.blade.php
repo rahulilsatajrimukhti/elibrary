@@ -20,25 +20,38 @@
     </li>
 
     @foreach ($menus as $menu)
+        @php
+            $isActiveParent = $menu->children->contains(function ($child) {
+                return $child->route && request()->routeIs($child->route);
+            });
+        @endphp
+
         @if ($menu->children->count())
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+            <li class="nav-item {{ $isActiveParent ? 'active' : '' }}">
+
+                <a class="nav-link {{ $isActiveParent ? '' : 'collapsed' }}" href="#" data-toggle="collapse"
                     data-target="#menu{{ $menu->id }}">
+
                     <i class="fas fa-fw fa-{{ $menu->icon }}"></i>
                     <span>{{ $menu->name }}</span>
                 </a>
 
-                <div id="menu{{ $menu->id }}" class="collapse">
+                <div id="menu{{ $menu->id }}" class="collapse {{ $isActiveParent ? 'show' : '' }}">
+
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         @foreach ($menu->children as $child)
-                            <a class="collapse-item" href="{{ $child->route ? route($child->route) : '#' }}">
+                            <a class="collapse-item 
+                           {{ request()->routeIs($child->route) ? 'active' : '' }}"
+                                href="{{ $child->route ? route($child->route) : '#' }}">
+
                                 {{ $child->name }}
                             </a>
                         @endforeach
 
                     </div>
                 </div>
+
             </li>
         @else
             <li class="nav-item {{ request()->routeIs($menu->route) ? 'active' : '' }}">
