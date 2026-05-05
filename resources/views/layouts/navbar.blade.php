@@ -164,7 +164,9 @@
          <li class="nav-item dropdown no-arrow">
              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                     {{ auth()->user()->name }}
+                 </span>
                  <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
              </a>
              <!-- Dropdown - User Information -->
@@ -192,3 +194,39 @@
      </ul>
 
  </nav>
+
+ <!-- Logout Modal-->
+ <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+
+     <div class="modal-dialog" role="document">
+         <div class="modal-content">
+
+             <div class="modal-header">
+                 <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                     @csrf
+                 </form>
+                 <h5 class="modal-title">Ready to Leave?</h5>
+                 <button class="close" type="button" data-dismiss="modal">
+                     <span>×</span>
+                 </button>
+             </div>
+
+             <div class="modal-body">
+                 Pilih "Logout" jika ingin keluar dari sistem.
+             </div>
+
+             <div class="modal-footer">
+                 <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                     Cancel
+                 </button>
+
+                 <button class="btn btn-primary"
+                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                     Logout
+                 </button>
+             </div>
+
+         </div>
+     </div>
+ </div>
