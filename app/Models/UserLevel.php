@@ -12,4 +12,9 @@ class UserLevel extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class, 'user_level_menus');
+    }
 }

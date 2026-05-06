@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Menu;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,11 +23,23 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('layouts.sidebar', function ($view) {
 
-            $menus = Menu::whereNull('parent_id')
+            if (!Auth::check()) return;
+
+            $user = Auth::user();
+
+            $menus = $user->userLevel
+                ->menus()
+                ->whereNull('parent_id')
                 ->where('is_active', 1)
                 ->orderBy('order')
-                ->with(['children' => function ($q) {
-                    $q->where('is_active', 1)->orderBy('order');
+                ->with(['children' => function ($q) use ($user) {
+                    $q->where('is_active', 1)
+                        ->orderBy('order')
+                        ->whereIn('id', function ($sub) use ($user) {
+                            $sub->select('menu_id')
+                                ->from('user_level_menus')
+                                ->where('user_level_id', $user->user_level_id);
+                        });
                 }])
                 ->get();
 

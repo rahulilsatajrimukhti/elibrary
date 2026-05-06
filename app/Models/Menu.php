@@ -24,4 +24,9 @@ class Menu extends Model
     {
         return $this->hasMany(Menu::class, 'parent_id');
     }
+
+    public function userLevels()
+    {
+        return $this->belongsToMany(UserLevel::class, 'user_level_menus');
+    }
 }
