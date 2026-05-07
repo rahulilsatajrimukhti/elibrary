@@ -19,33 +19,87 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::middleware('check.menu:menus.index')->group(function () {
-        Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
-        Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
-        Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
-        Route::get('/menus/{menu}', [MenuController::class, 'show'])->name('menus.show');
-        Route::get('/menus/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
-        Route::put('/menus/{menu}', [MenuController::class, 'update'])->name('menus.update');
-        Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
-    });
+    Route::get('/menus', [MenuController::class, 'index'])
+        ->name('menus.index')
+        ->middleware('check.permission:menus.index,can_view');
 
-    Route::middleware('check.menu:users.index')->group(function () {
-        Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/users', [UserController::class, 'store'])->name('users.store');
-        Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-    });
+    Route::get('/menus/create', [MenuController::class, 'create'])
+        ->name('menus.create')
+        ->middleware('check.permission:menus.index,can_create');
 
-    Route::middleware('check.menu:user-levels.index')->group(function () {
-        Route::get('/user-levels', [UserLevelController::class, 'index'])->name('user-levels.index');
-        Route::get('/user-levels/create', [UserLevelController::class, 'create'])->name('user-levels.create');
-        Route::post('/user-levels', [UserLevelController::class, 'store'])->name('user-levels.store');
-        Route::get('/user-levels/{user_level}', [UserLevelController::class, 'show'])->name('user-levels.show');
-        Route::get('/user-levels/{user_level}/edit', [UserLevelController::class, 'edit'])->name('user-levels.edit');
-        Route::put('/user-levels/{user_level}', [UserLevelController::class, 'update'])->name('user-levels.update');
-        Route::delete('/user-levels/{user_level}', [UserLevelController::class, 'destroy'])->name('user-levels.destroy');
-    });
+    Route::post('/menus', [MenuController::class, 'store'])
+        ->name('menus.store')
+        ->middleware('check.permission:menus.index,can_create');
+
+    Route::get('/menus/{menu}', [MenuController::class, 'show'])
+        ->name('menus.show')
+        ->middleware('check.permission:menus.index,can_view');
+
+    Route::get('/menus/{menu}/edit', [MenuController::class, 'edit'])
+        ->name('menus.edit')
+        ->middleware('check.permission:menus.index,can_edit');
+
+    Route::put('/menus/{menu}', [MenuController::class, 'update'])
+        ->name('menus.update')
+        ->middleware('check.permission:menus.index,can_edit');
+
+    Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])
+        ->name('menus.destroy')
+        ->middleware('check.permission:menus.index,can_delete');
+
+    Route::get('/users', [UserController::class, 'index'])
+        ->name('users.index')
+        ->middleware('check.permission:users.index,can_view');
+
+    Route::get('/users/create', [UserController::class, 'create'])
+        ->name('users.create')
+        ->middleware('check.permission:users.index,can_create');
+
+    Route::post('/users', [UserController::class, 'store'])
+        ->name('users.store')
+        ->middleware('check.permission:users.index,can_create');
+
+    Route::get('/users/{user}', [UserController::class, 'show'])
+        ->name('users.show')
+        ->middleware('check.permission:users.index,can_view');
+
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])
+        ->name('users.edit')
+        ->middleware('check.permission:users.index,can_edit');
+
+    Route::put('/users/{user}', [UserController::class, 'update'])
+        ->name('users.update')
+        ->middleware('check.permission:users.index,can_edit');
+
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])
+        ->name('users.destroy')
+        ->middleware('check.permission:users.index,can_delete');
+
+    Route::get('/user-levels', [UserLevelController::class, 'index'])
+        ->name('user-levels.index')
+        ->middleware('check.permission:user-levels.index,can_view');
+
+    Route::get('/user-levels/create', [UserLevelController::class, 'create'])
+        ->name('user-levels.create')
+        ->middleware('check.permission:user-levels.index,can_create');
+
+    Route::post('/user-levels', [UserLevelController::class, 'store'])
+        ->name('user-levels.store')
+        ->middleware('check.permission:user-levels.index,can_create');
+
+    Route::get('/user-levels/{user_level}', [UserLevelController::class, 'show'])
+        ->name('user-levels.show')
+        ->middleware('check.permission:user-levels.index,can_view');
+
+    Route::get('/user-levels/{user_level}/edit', [UserLevelController::class, 'edit'])
+        ->name('user-levels.edit')
+        ->middleware('check.permission:user-levels.index,can_edit');
+
+    Route::put('/user-levels/{user_level}', [UserLevelController::class, 'update'])
+        ->name('user-levels.update')
+        ->middleware('check.permission:user-levels.index,can_edit');
+
+    Route::delete('/user-levels/{user_level}', [UserLevelController::class, 'destroy'])
+        ->name('user-levels.destroy')
+        ->middleware('check.permission:user-levels.index,can_delete');
 });

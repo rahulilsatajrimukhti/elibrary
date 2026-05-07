@@ -12,4 +12,13 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserLevel::class);
     }
+
+    public function hasPermission($route, $permission)
+    {
+        return $this->userLevel
+            ->menus()
+            ->where('route', $route)
+            ->wherePivot($permission, 1)
+            ->exists();
+    }
 }

@@ -9,10 +9,12 @@
                 User
             </h5>
 
-            <a href="{{ route('users.create') }}" class="btn-add-user">
-                <i class="fas fa-plus"></i>
-                <span class="btn-text">User</span>
-            </a>
+            @if (auth()->user()->hasPermission('users.index', 'can_create'))
+                <a href="{{ route('users.create') }}" class="btn-add-user">
+                    <i class="fas fa-plus"></i>
+                    <span class="btn-text">User</span>
+                </a>
+            @endif
         </div>
 
         @if (session('success'))
@@ -36,7 +38,9 @@
                             <th class="text-left">Email</th>
                             <th class="text-left">Role Akses</th>
                             <th width="100">Status</th>
-                            <th width="100">Aksi</th>
+                            @if (auth()->user()->hasPermission('users.index', 'can_create'))
+                                <th width="100">Aksi</th>
+                            @endif
                         </tr>
                     </thead>
 
@@ -55,20 +59,24 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <a href="{{ route('users.edit', $row->id) }}"
-                                        class="btn btn-warning btn-sm rounded-circle">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                    @if (auth()->user()->hasPermission('users.index', 'can_edit'))
+                                        <a href="{{ route('users.edit', $row->id) }}"
+                                            class="btn btn-warning btn-sm rounded-circle">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    @endif
 
-                                    <form action="{{ route('users.destroy', $row->id) }}" method="POST" class="d-inline"
-                                        onsubmit="return confirm('Hapus?')">
-                                        @csrf
-                                        @method('DELETE')
+                                    @if (auth()->user()->hasPermission('users.index', 'can_delete'))
+                                        <form action="{{ route('users.destroy', $row->id) }}" method="POST"
+                                            class="d-inline" onsubmit="return confirm('Hapus?')">
+                                            @csrf
+                                            @method('DELETE')
 
-                                        <button class="btn btn-danger btn-sm rounded-circle">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+                                            <button class="btn btn-danger btn-sm rounded-circle">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
