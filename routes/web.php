@@ -20,7 +20,6 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     Route::middleware('check.menu:menus.index')->group(function () {
-
         Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
         Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
         Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
@@ -31,7 +30,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('check.menu:users.index')->group(function () {
-
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -42,7 +40,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('check.menu:user-levels.index')->group(function () {
-
         Route::get('/user-levels', [UserLevelController::class, 'index'])->name('user-levels.index');
         Route::get('/user-levels/create', [UserLevelController::class, 'create'])->name('user-levels.create');
         Route::post('/user-levels', [UserLevelController::class, 'store'])->name('user-levels.store');
