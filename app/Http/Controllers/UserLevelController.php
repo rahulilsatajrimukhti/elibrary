@@ -12,9 +12,7 @@ use App\Models\UserLevel;
 
 class UserLevelController extends Controller
 {
-    public function __construct(private UserLevelService $service)
-    {
-    }
+    public function __construct(private UserLevelService $service) {}
 
     public function index()
     {
@@ -57,7 +55,12 @@ class UserLevelController extends Controller
 
     public function permissions(UserLevel $userLevel)
     {
-        $menus = Menu::where('is_active', 1)
+        $menus = Menu::whereNull('parent_id')
+            ->where('is_active', 1)
+            ->with(['children' => function ($q) {
+                $q->where('is_active', 1)
+                    ->orderBy('order');
+            }])
             ->orderBy('order')
             ->get();
 

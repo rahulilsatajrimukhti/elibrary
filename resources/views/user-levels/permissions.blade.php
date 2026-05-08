@@ -49,12 +49,16 @@
                         </thead>
 
                         <tbody>
+
                             @forelse($menus as $menu)
+
+                                {{-- PARENT MENU --}}
                                 @php
                                     $permission = $userLevel->menus->where('id', $menu->id)->first();
                                 @endphp
 
-                                <tr>
+                                <tr class="bg-light">
+
                                     <td class="pl-3 align-middle small font-weight-bold text-gray-700">
                                         <i class="fas fa-folder-open text-primary mr-2"></i>
                                         {{ $menu->name }}
@@ -66,6 +70,7 @@
                                                 id="view_{{ $menu->id }}"
                                                 name="permissions[{{ $menu->id }}][can_view]" value="1"
                                                 {{ optional($permission)?->pivot?->can_view ? 'checked' : '' }}>
+
                                             <label class="custom-control-label" for="view_{{ $menu->id }}"></label>
                                         </div>
                                     </td>
@@ -76,6 +81,7 @@
                                                 id="create_{{ $menu->id }}"
                                                 name="permissions[{{ $menu->id }}][can_create]" value="1"
                                                 {{ optional($permission)?->pivot?->can_create ? 'checked' : '' }}>
+
                                             <label class="custom-control-label" for="create_{{ $menu->id }}"></label>
                                         </div>
                                     </td>
@@ -86,9 +92,9 @@
                                                 id="edit_{{ $menu->id }}"
                                                 name="permissions[{{ $menu->id }}][can_edit]" value="1"
                                                 {{ optional($permission)?->pivot?->can_edit ? 'checked' : '' }}>
+
                                             <label class="custom-control-label" for="edit_{{ $menu->id }}"></label>
                                         </div>
-
                                     </td>
 
                                     <td class="text-center align-middle">
@@ -97,18 +103,85 @@
                                                 id="delete_{{ $menu->id }}"
                                                 name="permissions[{{ $menu->id }}][can_delete]" value="1"
                                                 {{ optional($permission)?->pivot?->can_delete ? 'checked' : '' }}>
+
                                             <label class="custom-control-label" for="delete_{{ $menu->id }}"></label>
                                         </div>
                                     </td>
+
                                 </tr>
 
+                                {{-- CHILD MENU --}}
+                                @foreach ($menu->children as $child)
+                                    @php
+                                        $childPermission = $userLevel->menus->where('id', $child->id)->first();
+                                    @endphp
+
+                                    <tr>
+
+                                        <td class="pl-5 align-middle small text-gray-600">
+                                            <i class="fas fa-angle-right text-muted mr-2"></i>
+                                            {{ $child->name }}
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <div class="custom-control custom-switch d-inline-block">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="view_{{ $child->id }}"
+                                                    name="permissions[{{ $child->id }}][can_view]" value="1"
+                                                    {{ optional($childPermission)?->pivot?->can_view ? 'checked' : '' }}>
+
+                                                <label class="custom-control-label" for="view_{{ $child->id }}"></label>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <div class="custom-control custom-switch d-inline-block">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="create_{{ $child->id }}"
+                                                    name="permissions[{{ $child->id }}][can_create]" value="1"
+                                                    {{ optional($childPermission)?->pivot?->can_create ? 'checked' : '' }}>
+
+                                                <label class="custom-control-label"
+                                                    for="create_{{ $child->id }}"></label>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <div class="custom-control custom-switch d-inline-block">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="edit_{{ $child->id }}"
+                                                    name="permissions[{{ $child->id }}][can_edit]" value="1"
+                                                    {{ optional($childPermission)?->pivot?->can_edit ? 'checked' : '' }}>
+
+                                                <label class="custom-control-label" for="edit_{{ $child->id }}"></label>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <div class="custom-control custom-switch d-inline-block">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="delete_{{ $child->id }}"
+                                                    name="permissions[{{ $child->id }}][can_delete]" value="1"
+                                                    {{ optional($childPermission)?->pivot?->can_delete ? 'checked' : '' }}>
+
+                                                <label class="custom-control-label"
+                                                    for="delete_{{ $child->id }}"></label>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+
                             @empty
+
                                 <tr>
                                     <td colspan="5" class="text-center small text-muted py-4">
                                         Belum ada menu
                                     </td>
                                 </tr>
+
                             @endforelse
+
                         </tbody>
 
                     </table>

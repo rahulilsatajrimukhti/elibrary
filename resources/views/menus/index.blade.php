@@ -47,31 +47,49 @@
                     </thead>
 
                     <tbody>
+
                         @forelse($data as $key => $row)
-                            <tr>
-                                <td class="text-center small">{{ $key + 1 }}</td>
-                                <td class="small">
-                                    @if ($row->parent_id)
-                                        └─
-                                    @endif
+
+                            <tr class="bg-light">
+
+                                <td class="text-center small">
+                                    {{ $key + 1 }}
+                                </td>
+
+                                <td class="small font-weight-bold text-gray-700">
+                                    <i class="fas fa-folder-open text-primary mr-2"></i>
                                     {{ $row->name }}
                                 </td>
-                                <td class="small">{{ $row->route ?? '-' }}</td>
-                                <td class="small">{{ $row->icon ?? '-' }}</td>
+
                                 <td class="small">
-                                    {{ $row->parent?->name ?? '-' }}
+                                    {{ $row->route ?? '-' }}
                                 </td>
-                                <td class="small">{{ $row->order ?? '-' }}</td>
+
+                                <td class="small">
+                                    {{ $row->icon ?? '-' }}
+                                </td>
+
+                                <td class="small">
+                                    -
+                                </td>
+
+                                <td class="small">
+                                    {{ $row->order }}
+                                </td>
+
                                 <td class="text-center">
                                     <span
                                         class="badge badge-pill {{ $row->is_active ? 'badge-success' : 'badge-secondary' }}">
                                         {{ $row->is_active ? 'Aktif' : 'Nonaktif' }}
                                     </span>
                                 </td>
+
                                 <td class="text-center">
+
                                     @if (canAccess('menus.index', 'can_edit'))
                                         <a href="{{ route('menus.edit', $row->id) }}"
                                             class="btn btn-warning btn-sm rounded-circle">
+
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     @endif
@@ -79,6 +97,7 @@
                                     @if (canAccess('menus.index', 'can_delete'))
                                         <form action="{{ route('menus.destroy', $row->id) }}" method="POST"
                                             class="d-inline" onsubmit="return confirm('Hapus?')">
+
                                             @csrf
                                             @method('DELETE')
 
@@ -87,15 +106,83 @@
                                             </button>
                                         </form>
                                     @endif
+
                                 </td>
+
                             </tr>
+
+                            @foreach ($row->children as $child)
+                                <tr>
+
+                                    <td></td>
+
+                                    <td class="small pl-5 text-gray-600">
+                                        <i class="fas fa-angle-right text-muted mr-2"></i>
+                                        {{ $child->name }}
+                                    </td>
+
+                                    <td class="small">
+                                        {{ $child->route ?? '-' }}
+                                    </td>
+
+                                    <td class="small">
+                                        {{ $child->icon ?? '-' }}
+                                    </td>
+
+                                    <td class="small">
+                                        {{ $row->name }}
+                                    </td>
+
+                                    <td class="small">
+                                        {{ $child->order }}
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span
+                                            class="badge badge-pill {{ $child->is_active ? 'badge-success' : 'badge-secondary' }}">
+                                            {{ $child->is_active ? 'Aktif' : 'Nonaktif' }}
+                                        </span>
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        @if (canAccess('menus.index', 'can_edit'))
+                                            <a href="{{ route('menus.edit', $child->id) }}"
+                                                class="btn btn-warning btn-sm rounded-circle">
+
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endif
+
+                                        @if (canAccess('menus.index', 'can_delete'))
+                                            <form action="{{ route('menus.destroy', $child->id) }}" method="POST"
+                                                class="d-inline" onsubmit="return confirm('Hapus?')">
+
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button class="btn btn-danger btn-sm rounded-circle">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                    </td>
+
+                                </tr>
+                            @endforeach
+
                         @empty
+
                             <tr>
                                 <td colspan="8" class="text-center small text-muted py-3">
+
                                     Belum ada data
                                 </td>
                             </tr>
+
                         @endforelse
+
                     </tbody>
                 </table>
             </div>

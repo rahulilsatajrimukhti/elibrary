@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookCategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserLevelController;
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // Menu
     Route::get('/menus', [MenuController::class, 'index'])
         ->name('menus.index')
         ->middleware('check.permission:menus.index,can_view');
@@ -47,7 +49,7 @@ Route::middleware('auth')->group(function () {
         ->name('menus.destroy')
         ->middleware('check.permission:menus.index,can_delete');
 
-
+    // User
     Route::get('/users', [UserController::class, 'index'])
         ->name('users.index')
         ->middleware('check.permission:users.index,can_view');
@@ -76,7 +78,7 @@ Route::middleware('auth')->group(function () {
         ->name('users.destroy')
         ->middleware('check.permission:users.index,can_delete');
 
-
+    // User Level
     Route::get('/user-levels', [UserLevelController::class, 'index'])
         ->name('user-levels.index')
         ->middleware('check.permission:user-levels.index,can_view');
@@ -102,8 +104,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('check.permission:user-levels.index,can_edit');
 
     Route::delete('/user-levels/{user_level}', [UserLevelController::class, 'destroy'])
-        ->name('user-levels.destroy')
-        ->middleware('check.permission:user-levels.index,can_delete');
+        ->name('user-levels.destroy')->middleware('check.permission:user-levels.index,can_delete');
 
     Route::get(
         '/user-levels/{user_level}/permissions',
@@ -114,4 +115,48 @@ Route::middleware('auth')->group(function () {
         '/user-levels/{user_level}/permissions',
         [UserLevelController::class, 'updatePermissions']
     )->name('user-levels.permissions.update')->middleware('check.permission:user-levels.index,can_edit');
+
+    // Kategori Buku
+    Route::get('/categories', [BookCategoryController::class, 'index'])
+        ->name('categories.index')
+        ->middleware('check.permission:categories.index,can_view');
+
+    Route::get('/categories/create', [BookCategoryController::class, 'create'])
+        ->name('categories.create')
+        ->middleware('check.permission:categories.index,can_create');
+
+    Route::post('/categories', [BookCategoryController::class, 'store'])
+        ->name('categories.store')
+        ->middleware('check.permission:categories.index,can_create');
+
+    Route::get('/categories/{user_level}', [BookCategoryController::class, 'show'])
+        ->name('categories.show')
+        ->middleware('check.permission:categories.index,can_view');
+
+    Route::get('/categories/{user_level}/edit', [BookCategoryController::class, 'edit'])
+        ->name('categories.edit')
+        ->middleware('check.permission:categories.index,can_edit');
+
+    Route::put('/categories/{user_level}', [BookCategoryController::class, 'update'])
+        ->name('categories.update')
+        ->middleware('check.permission:categories.index,can_edit');
+
+    Route::delete('/categories/{user_level}', [BookCategoryController::class, 'destroy'])
+        ->name('categories.destroy')->middleware('check.permission:categories.index,can_delete');
+
+
+
+
+
+    Route::get('/authors', function () {
+        return 'Author Buku';
+    })->name('authors.index');
+
+    Route::get('/publishers', function () {
+        return 'Publishers Buku';
+    })->name('publishers.index');
+
+    Route::get('/books', function () {
+        return 'Buku';
+    })->name('books.index');
 });

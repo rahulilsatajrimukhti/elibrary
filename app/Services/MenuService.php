@@ -9,7 +9,14 @@ class MenuService
 {
     public function getAll()
     {
-        return Menu::orderBy('order')->get();
+        return Menu::whereNull('parent_id')
+            ->with([
+                'children' => function ($q) {
+                    $q->orderBy('order');
+                }
+            ])
+            ->orderBy('order')
+            ->get();
     }
 
     public function getParentMenus()
