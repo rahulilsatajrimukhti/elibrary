@@ -9,7 +9,7 @@
                 Menu
             </h5>
 
-            @if (auth()->user()->hasPermission('menus.index', 'can_create'))
+            @if (canAccess('user-levels.index', 'can_create'))
                 <a href="{{ route('menus.create') }}" class="btn-add-menu">
                     <i class="fas fa-plus"></i>
                     <span class="btn-text">Menu</span>
@@ -40,7 +40,7 @@
                             <th class="text-left">Menu Utama</th>
                             <th class="text-left">Urutan</th>
                             <th width="100">Status</th>
-                            @if (auth()->user()->hasPermission('menus.index', 'can_create'))
+                            @if (canAccess('menus.index', 'can_create'))
                                 <th width="100">Aksi</th>
                             @endif
                         </tr>
@@ -69,14 +69,14 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    @if (auth()->user()->hasPermission('menus.index', 'can_edit'))
+                                    @if (canAccess('menus.index', 'can_edit'))
                                         <a href="{{ route('menus.edit', $row->id) }}"
                                             class="btn btn-warning btn-sm rounded-circle">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     @endif
 
-                                    @if (auth()->user()->hasPermission('menus.index', 'can_delete'))
+                                    @if (canAccess('menus.index', 'can_delete'))
                                         <form action="{{ route('menus.destroy', $row->id) }}" method="POST"
                                             class="d-inline" onsubmit="return confirm('Hapus?')">
                                             @csrf

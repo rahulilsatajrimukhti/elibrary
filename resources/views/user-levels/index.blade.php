@@ -9,7 +9,7 @@
                 User Level
             </h5>
 
-            @if (auth()->user()->hasPermission('user-levels.index', 'can_create'))
+            @if (canAccess('user-levels.index', 'can_create'))
                 <a href="{{ route('user-levels.create') }}" class="btn-add">
                     <i class="fas fa-plus"></i>
                     <span class="btn-text">User Level</span>
@@ -56,14 +56,14 @@
 
                                 <td class="text-center">
 
-                                    @if (auth()->user()->hasPermission('user-levels.index', 'can_edit'))
+                                    @if (canAccess('user-levels.index', 'can_edit'))
                                         <a href="{{ route('user-levels.edit', $row->id) }}"
                                             class="btn btn-warning btn-sm rounded-circle">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     @endif
 
-                                    @if (auth()->user()->hasPermission('user-levels.index', 'can_delete'))
+                                    @if (canAccess('user-levels.index', 'can_delete'))
                                         <form action="{{ route('user-levels.destroy', $row->id) }}" method="POST"
                                             class="d-inline" onsubmit="return confirm('Hapus?')">
                                             @csrf
@@ -75,7 +75,7 @@
                                         </form>
                                     @endif
 
-                                    @if (auth()->user()->hasPermission('user-levels.index', 'can_edit'))
+                                    @if (canAccess('user-levels.index', 'can_edit'))
                                         <a href="{{ route('user-levels.permissions', $row->id) }}"
                                             class="btn btn-info btn-sm rounded-circle">
                                             <i class="fas fa-key"></i>
