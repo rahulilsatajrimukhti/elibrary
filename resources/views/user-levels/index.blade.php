@@ -9,10 +9,12 @@
                 User Level
             </h5>
 
-            <a href="{{ route('user-levels.create') }}" class="btn-add">
-                <i class="fas fa-plus"></i>
-                <span class="btn-text">User Level</span>
-            </a>
+            @if (auth()->user()->hasPermission('user-levels.index', 'can_create'))
+                <a href="{{ route('user-levels.create') }}" class="btn-add">
+                    <i class="fas fa-plus"></i>
+                    <span class="btn-text">User Level</span>
+                </a>
+            @endif
         </div>
 
         @if (session('success'))
@@ -34,7 +36,9 @@
                             <th width="50">#</th>
                             <th class="text-left">Nama</th>
                             <th width="100">Status</th>
-                            <th width="100">Aksi</th>
+                            @if (auth()->user()->hasPermission('user-levels.index', 'can_create'))
+                                <th width="100">Aksi</th>
+                            @endif
                         </tr>
                     </thead>
 
@@ -51,20 +55,24 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <a href="{{ route('user-levels.edit', $row->id) }}"
-                                        class="btn btn-warning btn-sm rounded-circle">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                    @if (auth()->user()->hasPermission('user-levels.index', 'can_edit'))
+                                        <a href="{{ route('user-levels.edit', $row->id) }}"
+                                            class="btn btn-warning btn-sm rounded-circle">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    @endif
 
-                                    <form action="{{ route('user-levels.destroy', $row->id) }}" method="POST"
-                                        class="d-inline" onsubmit="return confirm('Hapus?')">
-                                        @csrf
-                                        @method('DELETE')
+                                    @if (auth()->user()->hasPermission('user-levels.index', 'can_delete'))
+                                        <form action="{{ route('user-levels.destroy', $row->id) }}" method="POST"
+                                            class="d-inline" onsubmit="return confirm('Hapus?')">
+                                            @csrf
+                                            @method('DELETE')
 
-                                        <button class="btn btn-danger btn-sm rounded-circle">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+                                            <button class="btn btn-danger btn-sm rounded-circle">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

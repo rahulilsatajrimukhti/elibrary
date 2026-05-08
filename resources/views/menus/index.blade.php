@@ -9,10 +9,12 @@
                 Menu
             </h5>
 
-            <a href="{{ route('menus.create') }}" class="btn-add-menu">
-                <i class="fas fa-plus"></i>
-                <span class="btn-text">Menu</span>
-            </a>
+            @if (auth()->user()->hasPermission('menus.index', 'can_create'))
+                <a href="{{ route('menus.create') }}" class="btn-add-menu">
+                    <i class="fas fa-plus"></i>
+                    <span class="btn-text">Menu</span>
+                </a>
+            @endif
         </div>
 
         @if (session('success'))
@@ -38,7 +40,9 @@
                             <th class="text-left">Menu Utama</th>
                             <th class="text-left">Urutan</th>
                             <th width="100">Status</th>
-                            <th width="100">Aksi</th>
+                            @if (auth()->user()->hasPermission('menus.index', 'can_create'))
+                                <th width="100">Aksi</th>
+                            @endif
                         </tr>
                     </thead>
 
@@ -65,20 +69,24 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('menus.edit', $row->id) }}"
-                                        class="btn btn-warning btn-sm rounded-circle">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                    @if (auth()->user()->hasPermission('menus.index', 'can_edit'))
+                                        <a href="{{ route('menus.edit', $row->id) }}"
+                                            class="btn btn-warning btn-sm rounded-circle">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    @endif
 
-                                    <form action="{{ route('menus.destroy', $row->id) }}" method="POST" class="d-inline"
-                                        onsubmit="return confirm('Hapus?')">
-                                        @csrf
-                                        @method('DELETE')
+                                    @if (auth()->user()->hasPermission('menus.index', 'can_delete'))
+                                        <form action="{{ route('menus.destroy', $row->id) }}" method="POST"
+                                            class="d-inline" onsubmit="return confirm('Hapus?')">
+                                            @csrf
+                                            @method('DELETE')
 
-                                        <button class="btn btn-danger btn-sm rounded-circle">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+                                            <button class="btn btn-danger btn-sm rounded-circle">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
