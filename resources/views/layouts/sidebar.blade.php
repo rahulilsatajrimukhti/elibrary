@@ -12,7 +12,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
+    <li class="nav-item {{ activeMenu('dashboard') }}">
         <a class="nav-link" href="{{ url('/') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
@@ -21,9 +21,7 @@
 
     @foreach ($menus as $menu)
         @php
-            $isActiveParent = $menu->children->contains(function ($child) {
-                return $child->route && request()->routeIs($child->route);
-            });
+            $isActiveParent = menuOpen($menu->children);
         @endphp
 
         @if ($menu->children->count())
@@ -41,10 +39,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         @foreach ($menu->children as $child)
-                            <a class="collapse-item 
-                           {{ request()->routeIs($child->route) ? 'active' : '' }}"
+                            <a class="collapse-item {{ activeMenu($child->route) }}"
                                 href="{{ $child->route ? route($child->route) : '#' }}">
-
                                 {{ $child->name }}
                             </a>
                         @endforeach
@@ -54,7 +50,7 @@
 
             </li>
         @else
-            <li class="nav-item {{ request()->routeIs($menu->route) ? 'active' : '' }}">
+            <li class="nav-item {{ activeMenu($menu->route) }}">
                 <a class="nav-link" href="{{ $menu->route ? route($menu->route) : '#' }}">
                     <i class="fas fa-fw fa-{{ $menu->icon }}"></i>
                     <span>{{ $menu->name }}</span>
