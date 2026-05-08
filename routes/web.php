@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
         ->name('menus.destroy')
         ->middleware('check.permission:menus.index,can_delete');
 
+
     Route::get('/users', [UserController::class, 'index'])
         ->name('users.index')
         ->middleware('check.permission:users.index,can_view');
@@ -75,6 +76,7 @@ Route::middleware('auth')->group(function () {
         ->name('users.destroy')
         ->middleware('check.permission:users.index,can_delete');
 
+
     Route::get('/user-levels', [UserLevelController::class, 'index'])
         ->name('user-levels.index')
         ->middleware('check.permission:user-levels.index,can_view');
@@ -102,4 +104,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user-levels/{user_level}', [UserLevelController::class, 'destroy'])
         ->name('user-levels.destroy')
         ->middleware('check.permission:user-levels.index,can_delete');
+
+    Route::get(
+        '/user-levels/{user_level}/permissions',
+        [UserLevelController::class, 'permissions']
+    )->name('user-levels.permissions')->middleware('check.permission:user-levels.index,can_edit');
+
+    Route::put(
+        '/user-levels/{user_level}/permissions',
+        [UserLevelController::class, 'updatePermissions']
+    )->name('user-levels.permissions.update')->middleware('check.permission:user-levels.index,can_edit');
 });

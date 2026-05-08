@@ -15,6 +15,12 @@ class UserLevel extends Model
 
     public function menus()
     {
-        return $this->belongsToMany(Menu::class, 'user_level_menus');
+        return $this->belongsToMany(Menu::class, 'user_level_menus')
+            ->withPivot([
+                'can_view',
+                'can_create',
+                'can_edit',
+                'can_delete'
+            ]);
     }
 }

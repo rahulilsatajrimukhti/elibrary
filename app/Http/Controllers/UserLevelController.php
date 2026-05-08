@@ -6,10 +6,15 @@ use App\Services\UserLevelService;
 use App\DTO\UserLevelDTO;
 use App\Http\Requests\StoreUserLevelRequest;
 use App\Http\Requests\UpdateUserLevelRequest;
+use App\Http\Requests\UpdatePermissionRequest;
+use App\Models\Menu;
+use App\Models\UserLevel;
 
 class UserLevelController extends Controller
 {
-    public function __construct(private UserLevelService $service) {}
+    public function __construct(private UserLevelService $service)
+    {
+    }
 
     public function index()
     {
@@ -48,5 +53,33 @@ class UserLevelController extends Controller
     {
         $this->service->delete($id);
         return back()->with('success', 'Level User Berhasil Dihapus!');
+    }
+
+    public function permissions(UserLevel $userLevel)
+    {
+        $menus = Menu::where('is_active', 1)
+            ->orderBy('order')
+            ->get();
+
+        return view('user-levels.permissions', compact(
+            'userLevel',
+            'menus'
+        ));
+    }
+
+    public function updatePermissions(
+        UpdatePermissionRequest $request,
+        UserLevel $userLevel,
+        UserLevelService $service
+    ) {
+        $service->updatePermissions(
+            $userLevel,
+            $request->validated()['permissions'] ?? []
+        );
+
+        return back()->with(
+            'success',
+            'Permission Berhasil Diperbarui!'
+        );
     }
 }

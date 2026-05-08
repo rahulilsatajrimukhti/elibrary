@@ -35,9 +35,9 @@
                         <tr class="small text-muted text-center">
                             <th width="50">#</th>
                             <th class="text-left">Nama</th>
-                            <th width="100">Status</th>
+                            <th width="50">Status</th>
                             @if (auth()->user()->hasPermission('user-levels.index', 'can_create'))
-                                <th width="100">Aksi</th>
+                                <th width="150">Aksi</th>
                             @endif
                         </tr>
                     </thead>
@@ -55,6 +55,7 @@
                                 </td>
 
                                 <td class="text-center">
+
                                     @if (auth()->user()->hasPermission('user-levels.index', 'can_edit'))
                                         <a href="{{ route('user-levels.edit', $row->id) }}"
                                             class="btn btn-warning btn-sm rounded-circle">
@@ -72,6 +73,13 @@
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermission('user-levels.index', 'can_edit'))
+                                        <a href="{{ route('user-levels.permissions', $row->id) }}"
+                                            class="btn btn-info btn-sm rounded-circle">
+                                            <i class="fas fa-key"></i>
+                                        </a>
                                     @endif
                                 </td>
                             </tr>
