@@ -12,4 +12,9 @@ class Publisher extends Model
         'phone',
         'is_active',
     ];
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 }

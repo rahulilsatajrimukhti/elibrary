@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookCategoryController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
@@ -225,7 +226,34 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::get('/books', function () {
-        return 'Buku';
-    })->name('books.index');
+    Route::prefix('books')->controller(BookController::class)->group(function () {
+
+        Route::get('/', 'index')
+            ->name('books.index')
+            ->middleware('check.permission:books.index,can_view');
+
+        Route::get('/create', 'create')
+            ->name('books.create')
+            ->middleware('check.permission:books.index,can_create');
+
+        Route::post('/', 'store')
+            ->name('books.store')
+            ->middleware('check.permission:books.index,can_create');
+
+        Route::get('/{book}', 'show')
+            ->name('books.show')
+            ->middleware('check.permission:books.index,can_view');
+
+        Route::get('/{book}/edit', 'edit')
+            ->name('books.edit')
+            ->middleware('check.permission:books.index,can_edit');
+
+        Route::put('/{book}', 'update')
+            ->name('books.update')
+            ->middleware('check.permission:books.index,can_edit');
+
+        Route::delete('/{book}', 'destroy')
+            ->name('books.destroy')
+            ->middleware('check.permission:books.index,can_delete');
+    });
 });

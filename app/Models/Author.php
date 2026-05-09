@@ -11,4 +11,9 @@ class Author extends Model
         'bio',
         'is_active',
     ];
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 }
