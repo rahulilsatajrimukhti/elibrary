@@ -45,6 +45,12 @@ class BookController extends Controller
         return redirect()->route('books.index')->with('success', 'Buku Berhasil Ditambah!');
     }
 
+    public function show($id)
+    {
+        $data = $this->service->find($id);
+        return view('books.show', compact('data'));
+    }
+
     public function edit($id)
     {
         $data = $this->service->find($id);

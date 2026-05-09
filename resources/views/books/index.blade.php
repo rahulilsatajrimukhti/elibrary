@@ -156,9 +156,14 @@
                                 </td>
 
                                 {{-- AKSI --}}
-                                @if (canAccess('books.index', 'can_edit') || canAccess('books.index', 'can_delete'))
-                                    <td class="text-center align-middle">
+                                <td class="text-center align-middle">
+                                    <a href="{{ route('books.show', $row->id) }}"
+                                        class="btn btn-info btn-sm rounded-circle">
 
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+
+                                    @if (canAccess('books.index', 'can_edit') || canAccess('books.index', 'can_delete'))
                                         @if (canAccess('books.index', 'can_edit'))
                                             <a href="{{ route('books.edit', $row->id) }}"
                                                 class="btn btn-warning btn-sm rounded-circle">
@@ -179,9 +184,8 @@
                                                 </button>
                                             </form>
                                         @endif
-
-                                    </td>
-                                @endif
+                                    @endif
+                                </td>
 
                             </tr>
 
