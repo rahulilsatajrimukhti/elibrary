@@ -12,27 +12,20 @@
 
         {{-- HEADER --}}
         <div class="d-flex align-items-center justify-content-between mb-4">
-
             <div class="d-flex align-items-center">
-
                 <a href="{{ route('books.index') }}" class="btn btn-light btn-sm rounded-circle mr-2 shadow-sm">
-
                     <i class="fas fa-arrow-left"></i>
-
                 </a>
 
                 <h5 class="mb-0 font-weight-bold text-gray-800">
                     Detail Buku
                 </h5>
-
             </div>
 
             @if (canAccess('books.index', 'can_edit'))
                 <a href="{{ route('books.edit', $data->id) }}" class="btn btn-warning btn-sm rounded-pill px-4 shadow-sm">
-
                     <i class="fas fa-edit mr-1"></i>
                     Edit Buku
-
                 </a>
             @endif
 
@@ -88,9 +81,7 @@
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
-
                         <div class="d-flex justify-content-between align-items-start mb-3">
-
                             <div>
                                 <h2 class="font-weight-bold text-gray-800 mb-1">
                                     {{ $data->title }}
@@ -106,13 +97,11 @@
                                 class="badge badge-pill px-3 py-2 {{ $data->is_active ? 'badge-success' : 'badge-secondary' }}">
                                 {{ $data->is_active ? 'Aktif' : 'Nonaktif' }}
                             </span>
-
                         </div>
 
                         <hr>
 
                         <div class="row">
-
                             <div class="col-md-6 mb-3">
                                 <small class="text-muted d-block">Kategori</small>
                                 <strong>{{ $data->category->name ?? '-' }}</strong>
@@ -150,18 +139,13 @@
                                     </span>
                                 @endif
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
 
                 {{-- DESKRIPSI --}}
                 <div class="card border-0 shadow-sm">
-
                     <div class="card-body">
-
                         <h6 class="font-weight-bold text-gray-700 mb-3">
                             Deskripsi
                         </h6>
@@ -169,9 +153,7 @@
                         <div class="text-muted" style="line-height: 1.9;">
                             {{ $data->description ?? 'Tidak ada deskripsi.' }}
                         </div>
-
                     </div>
-
                 </div>
 
             </div>
