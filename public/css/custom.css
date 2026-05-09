@@ -1,12 +1,13 @@
 .btn-add,
 .btn-add-user,
 .btn-add-menu,
-.btn-add-catb {
+.btn-add-catb,
+.btn-add-publish,
+.btn-add-author {
     display: inline-flex;
     align-items: center;
     background: #4e73df;
     color: #fff !important;
-    /* paksa putih */
     height: 35px;
     width: 35px;
     border-radius: 50px;
@@ -14,65 +15,70 @@
     transition: all 0.3s ease;
     padding: 0 10px;
     text-decoration: none !important;
-    /* hilangkan underline */
 }
 
-/* ICON */
 .btn-add i,
 .btn-add-user i,
 .btn-add-menu i,
-.btn-add-catb i {
+.btn-add-catb i,
+.btn-add-publish i,
+.btn-add-author i {
     font-size: 14px;
     min-width: 16px;
     text-align: center;
 }
 
-/* TEXT */
 .btn-add .btn-text,
 .btn-add-user .btn-text,
 .btn-add-menu .btn-text,
-.btn-add-catb .btn-text {
+.btn-add-catb .btn-text,
+.btn-add-publish .btn-text,
+.btn-add-author .btn-text {
     opacity: 0;
     margin-left: 8px;
     white-space: nowrap;
     font-size: 13px;
     color: #fff;
-    /* pastikan putih */
     text-decoration: none;
-    /* no underline */
     transition: opacity 0.3s ease;
 }
 
-/* HOVER */
 .btn-add:hover {
     width: 110px;
     background: #2e59d9;
     color: #fff !important;
-    /* jangan berubah */
 }
 
 .btn-add-user:hover {
     width: 75px;
     background: #2e59d9;
     color: #fff !important;
-    /* jangan berubah */
 }
 
 .btn-add-menu:hover {
     width: 80px;
     background: #2e59d9;
     color: #fff !important;
-    /* jangan berubah */
 }
 
 .btn-add-catb:hover {
     width: 130px;
     background: #2e59d9;
     color: #fff !important;
-    /* jangan berubah */
 }
 
-/* PENTING: override bootstrap link hover */
+.btn-add-publish:hover {
+    width: 95px;
+    background: #2e59d9;
+    color: #fff !important;
+}
+
+.btn-add-author:hover {
+    width: 90px;
+    background: #2e59d9;
+    color: #fff !important;
+}
+
 .btn-add:hover,
 .btn-add:focus,
 .btn-add:active,
@@ -85,6 +91,14 @@
 .btn-add-menu:focus,
 .btn-add-menu:active,
 
+.btn-add-publish:hover,
+.btn-add-publish:focus,
+.btn-add-publish:active,
+
+.btn-add-author:hover,
+.btn-add-author:focus,
+.btn-add-author:active,
+
 .btn-add-catb:hover,
 .btn-add-catb:focus,
 .btn-add-catb:active {
@@ -92,10 +106,11 @@
     text-decoration: none !important;
 }
 
-/* munculin text */
 .btn-add:hover .btn-text,
 .btn-add-user:hover .btn-text,
 .btn-add-menu:hover .btn-text,
+.btn-add-author:hover .btn-text,
+.btn-add-publish:hover .btn-text,
 .btn-add-catb:hover .btn-text {
     opacity: 1;
 }
