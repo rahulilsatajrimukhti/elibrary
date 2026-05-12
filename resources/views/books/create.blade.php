@@ -18,7 +18,7 @@
 
         </div>
 
-        <div class="card border-0 shadow-sm">
+        <div class="card border-0 shadow-sm mb-4">
 
             <div class="card-body p-4">
 
@@ -206,7 +206,7 @@
                                 <label class="small text-muted">
                                     Deskripsi
                                 </label>
-                                <textarea name="description" rows="5" placeholder="Masukkan deskripsi buku..."
+                                <textarea name="description" rows="6" placeholder="Masukkan deskripsi buku..."
                                     class="form-control form-control-sm rounded @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                                 @error('description')
                                     <div class="text-danger small mt-1 ml-2">

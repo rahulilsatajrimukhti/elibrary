@@ -31,7 +31,7 @@
 
         </div>
 
-        <div class="row">
+        <div class="row mb-4">
 
             {{-- COVER --}}
             <div class="col-lg-4">
