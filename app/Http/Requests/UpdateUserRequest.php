@@ -29,6 +29,8 @@ class UpdateUserRequest extends FormRequest
                 'email',
                 Rule::unique('users')->ignore($this->user)
             ],
+            'phone'         => 'nullable|string|max:30',
+            'address'       => 'nullable|string',
             'password'      => 'nullable|min:6',
             'user_level_id' => 'required|exists:user_levels,id',
             'is_active'     => 'nullable|boolean'

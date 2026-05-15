@@ -141,3 +141,63 @@
 #coverPreview:hover {
     transform: scale(1.02);
 }
+
+.permission-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f8f9fc !important;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.permission-table td,
+.permission-table th {
+    vertical-align: middle;
+    border-color: #edf2f9;
+}
+
+.permission-table tbody tr:hover {
+    background: #f8f9fc;
+    transition: 0.2s;
+}
+
+.permission-parent {
+    background: #f8f9fc;
+    border-left: 4px solid #4e73df;
+}
+
+.permission-parent td {
+    font-weight: 600;
+}
+
+.permission-table .custom-switch {
+    margin-bottom: 0;
+}
+
+.permission-table td {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+}
+
+.permission-table .text-gray-600 {
+    font-size: 13px;
+}
+
+.permission-table .text-gray-700 {
+    font-size: 14px;
+}
+
+.permission-page .card {
+    overflow: hidden;
+    border-radius: 0.75rem;
+}
+
+.permission-page .btn-primary {
+    min-width: 180px;
+}
+
+.permission-empty {
+    color: #d1d3e2;
+    font-size: 18px;
+    font-weight: 300;
+}

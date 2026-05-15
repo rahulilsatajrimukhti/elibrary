@@ -21,6 +21,16 @@
                     @csrf
                     @method('PUT')
 
+                    @if ($data->member_code)
+                        <div class="form-group mb-3">
+                            <label class="small text-muted">
+                                Kode Member
+                            </label>
+                            <input type="text" class="form-control form-control-sm rounded-pill px-3 bg-light"
+                                value="{{ $data->member_code }}" readonly>
+                        </div>
+                    @endif
+
                     <div class="form-group mb-3">
                         <label class="small text-muted">Nama</label>
                         <input type="text" name="name"
@@ -48,8 +58,51 @@
                     </div>
 
                     <div class="form-group mb-3">
+                        <label class="small text-muted">
+                            No. HP
+                        </label>
+                        <input type="text" name="phone" value="{{ old('phone', $data->phone) }}"
+                            class="form-control form-control-sm rounded-pill px-3 @error('phone') is-invalid @enderror">
+                        @error('phone')
+                            <div class="text-danger small mt-1 ml-2">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="small text-muted">
+                            Alamat
+                        </label>
+                        <textarea name="address" rows="3"
+                            class="form-control form-control-sm rounded @error('address') is-invalid @enderror">{{ old('address', $data->address) }}</textarea>
+                        @error('address')
+                            <div class="text-danger small mt-1 ml-2">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="small text-muted">
+                            Password Baru
+                        </label>
+                        <input type="password" name="password" placeholder="Kosongkan jika tidak diubah"
+                            class="form-control form-control-sm rounded-pill px-3 @error('password') is-invalid @enderror">
+                        @error('password')
+                            <div class="text-danger small mt-1 ml-2">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label class="small">User Level</label>
                         <select name="user_level_id" class="form-control form-control-sm rounded-pill">
+                            <option value="">-- Pilih --</option>
                             @foreach ($levels as $lvl)
                                 <option value="{{ $lvl->id }}"
                                     {{ $data->user_level_id == $lvl->id ? 'selected' : '' }}>
@@ -87,22 +140,3 @@
 
     </div>
 @endsection
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const inputs = document.querySelectorAll("input, textarea, select");
-        inputs.forEach(input => {
-            input.addEventListener("input", function() {
-                this.classList.remove("is-invalid");
-                let error = this.parentElement.querySelector(".text-danger");
-                if (error) {
-                    error.style.transition = "0.2s";
-                    error.style.opacity = "0";
-                    setTimeout(() => error.remove(), 200);
-                }
-
-            });
-        });
-
-    });
-</script>

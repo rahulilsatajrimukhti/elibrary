@@ -6,7 +6,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $fillable = ['name', 'email', 'password', 'user_level_id', 'is_active'];
+    protected $fillable = [
+        'member_code',
+        'name',
+        'email',
+        'phone',
+        'address',
+        'avatar',
+        'password',
+        'user_level_id',
+        'is_active'
+    ];
 
     public function userLevel()
     {

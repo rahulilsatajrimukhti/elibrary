@@ -1,3 +1,4 @@
+// Ngilangin Alert
 setTimeout(() => {
     document.querySelectorAll(".alert").forEach((el) => {
         el.classList.add("hide");
@@ -5,6 +6,7 @@ setTimeout(() => {
     });
 }, 3000);
 
+// Cover Buku
 document.addEventListener("DOMContentLoaded", function () {
 
     // REMOVE ERROR
@@ -50,5 +52,63 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
+
+});
+
+// Ceklis Permission
+$(document).ready(function () {
+    if ($('.permission-page').length) {
+        $('#check_all_view').on('change', function () {
+
+            $('.permission-view')
+                .prop('checked', $(this).prop('checked'))
+                .trigger('change');
+        });
+
+        $('#check_all_create').on('change', function () {
+
+            $('.permission-create')
+                .prop('checked', $(this).prop('checked'))
+                .trigger('change');
+        });
+
+        $('#check_all_edit').on('change', function () {
+
+            $('.permission-edit')
+                .prop('checked', $(this).prop('checked'))
+                .trigger('change');
+        });
+
+        $('#check_all_delete').on('change', function () {
+
+            $('.permission-delete')
+                .prop('checked', $(this).prop('checked'))
+                .trigger('change');
+        });
+
+        $('.permission-create, .permission-edit, .permission-delete')
+            .on('change', function () {
+
+                let row = $(this).closest('tr');
+
+                if ($(this).is(':checked')) {
+
+                    row.find('.permission-view')
+                        .prop('checked', true);
+                }
+            });
+
+        $('.permission-view').on('change', function () {
+
+            let row = $(this).closest('tr');
+
+            if (!$(this).is(':checked')) {
+
+                row.find('.permission-create, .permission-edit, .permission-delete')
+                    .prop('checked', false);
+            }
+        });
+
+    }
 
 });

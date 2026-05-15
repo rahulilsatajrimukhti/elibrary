@@ -63,22 +63,3 @@
 
     </div>
 @endsection
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const inputs = document.querySelectorAll("input, textarea, select");
-        inputs.forEach(input => {
-            input.addEventListener("input", function() {
-                this.classList.remove("is-invalid");
-                let error = this.parentElement.querySelector(".text-danger");
-                if (error) {
-                    error.style.transition = "0.2s";
-                    error.style.opacity = "0";
-                    setTimeout(() => error.remove(), 200);
-                }
-
-            });
-        });
-
-    });
-</script>

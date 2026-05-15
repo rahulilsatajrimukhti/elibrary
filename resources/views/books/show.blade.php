@@ -127,7 +127,7 @@
 
                                 @if ($data->stock <= 0)
                                     <span class="badge badge-danger badge-pill px-3">
-                                        Habis
+                                        Kosong
                                     </span>
                                 @elseif ($data->stock < 5)
                                     <span class="badge badge-warning badge-pill px-3">

@@ -11,7 +11,7 @@
             </a>
 
             <h5 class="mb-0 font-weight-bold text-gray-800">
-                Tambah User
+                Tambah Akun
             </h5>
         </div>
 
@@ -41,6 +41,34 @@
                             value="{{ old('email') }}">
                         @error('email')
                             <small class="text-danger ml-2">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="small text-muted">
+                            No. HP
+                        </label>
+                        <input type="text" name="phone" value="{{ old('phone') }}"
+                            class="form-control form-control-sm rounded-pill px-3 @error('phone') is-invalid @enderror">
+                        @error('phone')
+                            <div class="text-danger small mt-1 ml-2">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="small text-muted">
+                            Alamat
+                        </label>
+                        <textarea name="address" rows="3"
+                            class="form-control form-control-sm rounded @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
+                        @error('address')
+                            <div class="text-danger small mt-1 ml-2">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
@@ -100,22 +128,3 @@
 
     </div>
 @endsection
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const inputs = document.querySelectorAll("input, textarea, select");
-        inputs.forEach(input => {
-            input.addEventListener("input", function() {
-                this.classList.remove("is-invalid");
-                let error = this.parentElement.querySelector(".text-danger");
-                if (error) {
-                    error.style.transition = "0.2s";
-                    error.style.opacity = "0";
-                    setTimeout(() => error.remove(), 200);
-                }
-
-            });
-        });
-
-    });
-</script>
