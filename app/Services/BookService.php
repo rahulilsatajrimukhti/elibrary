@@ -36,7 +36,18 @@ class BookService
 
     public function find($id)
     {
-        return Book::findOrFail($id);
+        return Book::with([
+            'category',
+            'author',
+            'publisher',
+        ])
+            ->withCount([
+                'borrowings',
+                'borrowings as borrowed_count' => function ($query) {
+                    $query->where('status', 'borrowed');
+                }
+            ])
+            ->findOrFail($id);
     }
 
     public function update(

@@ -122,8 +122,10 @@
                                 <strong>{{ $data->publish_year ?? '-' }}</strong>
                             </div>
 
-                            <div class="col-md-6">
-                                <small class="text-muted d-block">Stock</small>
+                            <div class="col-md-6 mb-3">
+                                <small class="text-muted d-block">
+                                    Stock Tersedia
+                                </small>
 
                                 @if ($data->stock <= 0)
                                     <span class="badge badge-danger badge-pill px-3">
@@ -138,6 +140,26 @@
                                         {{ $data->stock }}
                                     </span>
                                 @endif
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <small class="text-muted d-block">
+                                    Sedang Dipinjam
+                                </small>
+
+                                <span class="badge badge-info badge-pill px-3">
+                                    {{ $data->borrowed_count }}
+                                </span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <small class="text-muted d-block">
+                                    Total Dipinjam
+                                </small>
+
+                                <strong>
+                                    {{ $data->borrowings_count }}x
+                                </strong>
                             </div>
                         </div>
                     </div>

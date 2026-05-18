@@ -31,4 +31,14 @@ class User extends Authenticatable
             ->wherePivot($permission, 1)
             ->exists();
     }
+
+    public function borrowings()
+    {
+        return $this->hasMany(Borrowing::class, 'member_id');
+    }
+
+    public function processedBorrowings()
+    {
+        return $this->hasMany(Borrowing::class, 'borrowed_by');
+    }
 }

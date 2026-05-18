@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookCategoryController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
@@ -87,7 +88,6 @@ Route::middleware('auth')->group(function () {
             ->middleware('check.permission:users.index,can_delete');
     });
 
-
     // User Level
     Route::prefix('user-levels')->controller(UserLevelController::class)->group(function () {
 
@@ -160,7 +160,6 @@ Route::middleware('auth')->group(function () {
             ->middleware('check.permission:categories.index,can_delete');
     });
 
-
     // Author
     Route::prefix('authors')->controller(AuthorController::class)->group(function () {
 
@@ -225,7 +224,7 @@ Route::middleware('auth')->group(function () {
             ->middleware('check.permission:publishers.index,can_delete');
     });
 
-
+    // Book
     Route::prefix('books')->controller(BookController::class)->group(function () {
 
         Route::get('/', 'index')
@@ -255,5 +254,29 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{book}', 'destroy')
             ->name('books.destroy')
             ->middleware('check.permission:books.index,can_delete');
+    });
+
+    // Borrow
+    Route::prefix('borrowings')->controller(BorrowingController::class)->group(function () {
+
+        Route::get('/', 'index')
+            ->name('borrowings.index')
+            ->middleware('check.permission:borrowings.index,can_view');
+
+        Route::get('/create', 'create')
+            ->name('borrowings.create')
+            ->middleware('check.permission:borrowings.index,can_create');
+
+        Route::post('/', 'store')
+            ->name('borrowings.store')
+            ->middleware('check.permission:borrowings.index,can_create');
+
+        Route::get('/{borrowing}', 'show')
+            ->name('borrowings.show')
+            ->middleware('check.permission:borrowings.index,can_view');
+
+        Route::patch('/{borrowing}/return', 'returnBook')
+            ->name('borrowings.return')
+            ->middleware('check.permission:borrowings.index,can_edit');
     });
 });

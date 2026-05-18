@@ -3,6 +3,7 @@
 .btn-add-menu,
 .btn-add-catb,
 .btn-add-publish,
+.btn-add-borrow,
 .btn-add-author {
     display: inline-flex;
     align-items: center;
@@ -22,6 +23,7 @@
 .btn-add-menu i,
 .btn-add-catb i,
 .btn-add-publish i,
+.btn-add-borrow i,
 .btn-add-author i {
     font-size: 14px;
     min-width: 16px;
@@ -33,6 +35,7 @@
 .btn-add-menu .btn-text,
 .btn-add-catb .btn-text,
 .btn-add-publish .btn-text,
+.btn-add-borrow .btn-text,
 .btn-add-author .btn-text {
     opacity: 0;
     margin-left: 8px;
@@ -79,26 +82,30 @@
     color: #fff !important;
 }
 
+.btn-add-borrow:hover {
+    width: 115px;
+    background: #2e59d9;
+    color: #fff !important;
+}
+
 .btn-add:hover,
 .btn-add:focus,
 .btn-add:active,
-
 .btn-add-user:hover,
 .btn-add-user:focus,
 .btn-add-user:active,
-
 .btn-add-menu:hover,
 .btn-add-menu:focus,
 .btn-add-menu:active,
-
 .btn-add-publish:hover,
 .btn-add-publish:focus,
 .btn-add-publish:active,
-
 .btn-add-author:hover,
 .btn-add-author:focus,
 .btn-add-author:active,
-
+.btn-add-borrow:hover,
+.btn-add-borrow:focus,
+.btn-add-borrow:active,
 .btn-add-catb:hover,
 .btn-add-catb:focus,
 .btn-add-catb:active {
@@ -111,6 +118,7 @@
 .btn-add-menu:hover .btn-text,
 .btn-add-author:hover .btn-text,
 .btn-add-publish:hover .btn-text,
+.btn-add-borrow:hover .btn-text,
 .btn-add-catb:hover .btn-text {
     opacity: 1;
 }
@@ -131,7 +139,7 @@
 }
 
 .modal-body img {
-    transition: .2s ease;
+    transition: 0.2s ease;
 }
 
 .modal-body img:hover {
